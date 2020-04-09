@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pods Failed</title>
+</head>
+<style>
+        table, th, td, tr
+        {
+                border: 1px solid black;
+        }
+        </style>
+<body>
+
+	<center>
+                        <h1> Projects with Pods Failed </h1>
+	</center>
+
+	<div id="myData">
+
+	<table id="dataTable" style="width:100%"> 
+		<tr>
+    			<th>Projects Name</th>
+   			<th>No of Pods Failed</th>
+  		</tr>
+ 	</table>	
+
+	</div>
+    <script>
+        fetch('app_failed.json')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        function appendData(data) {
+            	var mainContainer = document.getElementById("dataTable");
+		Object.keys(data).forEach(key =>{
+			var tr = document.createElement("tr");
+			var td1=document.createElement("td");
+			var td2=document.createElement("td");
+			td1.innerHTML = key;
+			td2.innerHTML = data[key];
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+                	mainContainer.appendChild(tr);
+		})
+        }
+    </script>
+</body>
+</html>
